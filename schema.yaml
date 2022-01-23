@@ -1,0 +1,52 @@
+users:
+  userID: String
+  name: String
+  message: String
+  iconURL: String?
+
+# 友達検索機能
+  friendUsers: # 検索したくなったらAlgoliaを使用する（全文検索）
+    documentID: friendUserID
+    name: String?
+    createdAt: TimeStamp #追加した順に
+
+  # ↓この部分を使用してアプリ起動時に現在トーク中の一覧を取得する
+  attendingRooms:
+    documentID: directRoomID or groupRoomID
+    roomRef: DocumentReference
+    unreadMessageCount: int
+    latestReadMessageID: String? # 最後に見た数値
+    updatedAt: Timestamp
+
+# ↓1:1でのやり取り
+directRooms:
+  documentID: random
+  name: String
+  userIDs: [String] # 参加しているユーザー2名のID
+  updateAt: Timestamp
+
+  messages: # FunctionsでmessageがonCreate => userIDsのそれぞのれattendingRoomsを更新する。(updatedAt, unreadMessageCount)
+    documentID: random
+    type: String # plain, images
+    body: String
+    createdAt: Timestamp
+    fromUserID: String
+
+# # ↓グループでのやり取り
+# groupRooms:
+#   documentID: random
+#   name: String
+#   iconURL: String
+#   groupUserCount: int
+#   updateAt: Timestamp
+
+#   messages: # FunctionsでmessageがonCreate => userIDsのそれぞのれattendingRoomsを更新する。(updatedAt, unreadMessageCount)
+#     documentID: random
+#     type: String # plain, images
+#     body: String
+#     createdAt: Timestamp
+#     fromUserID: String
+
+#   groupUsers:
+#     documentID: userID
+#     joinedAt: Timestamp
