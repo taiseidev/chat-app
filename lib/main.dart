@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'first_page.dart';
-import 'top_page.dart';
+
+import 'ui/top_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

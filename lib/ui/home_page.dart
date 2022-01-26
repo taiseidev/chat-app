@@ -1,4 +1,9 @@
+import 'package:chatapp/repository/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'user_info_edit.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -20,7 +25,12 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class UserInformation extends StatelessWidget {
+class UserInformation extends StatefulWidget {
+  @override
+  State<UserInformation> createState() => _UserInformationState();
+}
+
+class _UserInformationState extends State<UserInformation> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,12 +42,12 @@ class UserInformation extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
           color: Colors.grey[700],
         ),
-        child: _buildUserInformation(),
+        child: _buildUserInformation(context),
       ),
     );
   }
 
-  Widget _buildUserInformation() {
+  Widget _buildUserInformation(context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
@@ -45,7 +55,7 @@ class UserInformation extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundImage: NetworkImage(
-              'https://images.unsplash.com/photo-1556225496-ff493e20d9a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
+              'https://lh3.googleusercontent.com/a-/AOh14GjZ7lp7qkI3c203YQSOyypOoM4TMWze7XfOTge-=s96-c',
             ),
             radius: 50,
           ),
@@ -58,23 +68,41 @@ class UserInformation extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Flutterくん',
+                    '',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         color: Colors.white),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.edit,
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
                       color: Colors.white,
+                    ),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UserInfoEdit(),
+                          ),
+                        );
+                      },
+                      icon: Icon(
+                        Icons.edit,
+                        color: Colors.grey[700],
+                      ),
                     ),
                   ),
                 ],
               ),
               Text(
-                'flutter.test@gmail.com',
+                '',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 10,
@@ -87,7 +115,7 @@ class UserInformation extends StatelessWidget {
               Container(
                 width: 150,
                 child: Text(
-                  'Flutterエンジニアです。個人アプリ開発もしています。よろしくお願いいたします。',
+                  '',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 10,
