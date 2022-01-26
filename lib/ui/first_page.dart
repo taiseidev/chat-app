@@ -1,14 +1,12 @@
-import 'package:chatapp/chat_page.dart';
+import 'package:chatapp/provider/bottom_navigation_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'chat_page.dart';
 import 'home_page.dart';
-import 'provider/bottom_navigation_provider.dart';
 import 'setting_page.dart';
 
 class ChatApp extends StatelessWidget {
-  const ChatApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
