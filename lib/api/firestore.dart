@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 class FirestoreAPI {
-  static Future<void> setUserData(UserCredential result) async {
-    final user = result.user;
+  static Future<void> setUserData(UserCredential userInfo) async {
+    final user = userInfo.user;
     await FirebaseFirestore.instance.collection('user').add(
       {
         'uid': user!.uid,

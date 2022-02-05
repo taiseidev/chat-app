@@ -1,9 +1,8 @@
-import 'package:chatapp/repository/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'user_info_edit.dart';
+import 'home/user/user_info_edit.dart';
 
 class HomePage extends StatelessWidget {
   @override

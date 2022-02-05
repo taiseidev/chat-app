@@ -1,4 +1,4 @@
-import 'package:chatapp/repository/firestore.dart';
+import 'package:chatapp/repository/firestore_repository.dart';
 import 'package:chatapp/state/user_information_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

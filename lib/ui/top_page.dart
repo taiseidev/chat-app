@@ -1,7 +1,8 @@
-import 'package:chatapp/repository/auth.dart';
+import 'package:chatapp/config/config.dart' as config;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../provider/provider.dart';
 import 'first_page.dart';
 
 class TopPage extends ConsumerWidget {
@@ -9,15 +10,14 @@ class TopPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _repository = ref.read(googleSignInRepositoryProvider);
+    final _repository = ref.read(firestoreRepository);
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
-              'ChatChat',
+              config.appTitle,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
@@ -32,11 +32,11 @@ class TopPage extends ConsumerWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ChatApp(),
+                    builder: (context) => const FirstPage(),
                   ),
                 );
               },
-              child: const Text('ログイン'),
+              child: const Text(config.loginText),
             ),
           ],
         ),
