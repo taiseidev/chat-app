@@ -1,23 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'user_info_model.freezed.dart';
-part 'user_info_model.g.dart';
+part 'user_model.freezed.dart';
+part 'user_model.g.dart';
 
 @freezed
-class UserInfoModel with _$UserInfoModel {
-  const factory UserInfoModel({
-    @Default('') String userId,
-    @Default('') String name,
-    @Default('') String email,
-    String? iconUrl,
+class UserModel with _$UserModel {
+  const factory UserModel({
+    required String uid,
+    required String name,
+    required String email,
+    String? iconURL,
     String? message,
-  }) = _UserInfoModel;
+  }) = _UserModel;
 
-  factory UserInfoModel.fromJson(Map<String, dynamic> json) =>
-      _$UserInfoModelFromJson(json);
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
 
-  factory UserInfoModel.fromSnapshot(
+  factory UserModel.fromSnapshot(
           DocumentSnapshot<Map<String, dynamic>> snapshot) =>
-      UserInfoModel.fromJson(snapshot.data()!);
+      UserModel.fromJson(snapshot.data()!);
 }

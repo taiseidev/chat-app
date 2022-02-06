@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'chat/chat_page.dart';
-import 'home_page.dart';
+import 'home/home_page.dart';
 import 'setting_page.dart';
 
 class FirstPage extends StatelessWidget {
