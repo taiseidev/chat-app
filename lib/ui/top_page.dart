@@ -1,6 +1,8 @@
 import 'package:chatapp/config/config.dart' as config;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 
 import '../provider/provider.dart';
 import 'first_page.dart';
@@ -10,36 +12,42 @@ class TopPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _repository = ref.read(firestoreRepository);
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              config.appTitle,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-              ),
+      body: _buildBody(context, ref),
+    );
+  }
+
+  Widget _buildBody(BuildContext context, WidgetRef ref) {
+    final _notifier = ref.read(firestoreRepository);
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            config.appTitle,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
             ),
-            const SizedBox(
-              height: 50,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                await _repository.fetchGoogleSignIn(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const FirstPage(),
-                  ),
-                );
-              },
-              child: const Text(config.loginText),
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          // GoogleSignInButton
+          SignInButton(
+            Buttons.Google,
+            text: "Sign up with Google",
+            onPressed: () async {
+              await _notifier.fetchGoogleSignIn(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const FirstPage(),
+                ),
+              );
+            },
+          )
+        ],
       ),
     );
   }

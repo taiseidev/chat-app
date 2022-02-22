@@ -1,11 +1,9 @@
-import 'package:chatapp/state/user_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleAPI {
-  static Future<UserCredential> logIn(BuildContext context) async {
+  static Future logIn(BuildContext context) async {
     final _googleSignIn = GoogleSignIn(
       scopes: [
         'email',
@@ -13,16 +11,21 @@ class GoogleAPI {
       ],
     );
 
-    GoogleSignInAccount? signinAccount = await _googleSignIn.signIn();
+    GoogleSignInAccount? _signinAccount = await _googleSignIn.signIn();
 
-    GoogleSignInAuthentication auth = await signinAccount!.authentication;
-    final credential = GoogleAuthProvider.credential(
-      idToken: auth.idToken,
-      accessToken: auth.accessToken,
-    );
+    GoogleSignInAuthentication? auth = await _signinAccount?.authentication;
+    if (auth != null) {
+      final credential = GoogleAuthProvider.credential(
+        idToken: auth.idToken,
+        accessToken: auth.accessToken,
+      );
 
-    final userInfo =
-        await FirebaseAuth.instance.signInWithCredential(credential);
-    return userInfo;
+      // Google認証を通過した後、Firebase側にログイン　※emailが存在しなければ登録
+      final userInfo =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      return userInfo;
+    } else {
+      return;
+    }
   }
 }

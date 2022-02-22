@@ -1,4 +1,5 @@
-import 'package:chatapp/provider/bottom_navigation_provider.dart';
+import 'package:chatapp/config/config.dart' as constants;
+import 'package:chatapp/provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,15 +15,16 @@ class FirstPage extends StatelessWidget {
     return Scaffold(
       appBar: _buildAppBar(),
       body: const Body(),
-      bottomNavigationBar: const BottomNabigationBar(),
+      bottomNavigationBar: const BottomNavigationBarClass(),
     );
   }
 
   AppBar _buildAppBar() {
     return AppBar(
       title: const Text(
-        'Chat App',
+        constants.appBarTitle,
         style: TextStyle(
+          fontWeight: FontWeight.bold,
           color: Colors.black87,
         ),
       ),
@@ -54,8 +56,8 @@ class Body extends ConsumerWidget {
   }
 }
 
-class BottomNabigationBar extends ConsumerWidget {
-  const BottomNabigationBar({Key? key}) : super(key: key);
+class BottomNavigationBarClass extends ConsumerWidget {
+  const BottomNavigationBarClass({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -65,15 +67,15 @@ class BottomNabigationBar extends ConsumerWidget {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'ホーム',
+          label: constants.bottomNavigationHome,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.chat),
-          label: 'チャット',
+          label: constants.bottomNavigationchat,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.settings),
-          label: '設定',
+          label: constants.bottomNavigationsetting,
         ),
       ],
       currentIndex: state as int,
