@@ -14,4 +14,6 @@ class FirestoreRepository {
   Future fetchGetUserInformation() async {
     return _firestoreAPI.getUserData();
   }
+
+  Future getFriendsInformation() async {}
 }

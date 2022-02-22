@@ -8,7 +8,8 @@ final firestoreRepository = Provider<FirestoreRepository>(
   (_) => FirestoreRepository(),
 );
 
-final userStateNotifier = StateNotifierProvider<UserStateNotifier, UserState>(
+final userStateNotifierProvider =
+    StateNotifierProvider<UserStateNotifier, UserState>(
   (ref) => UserStateNotifier(),
 );
 
