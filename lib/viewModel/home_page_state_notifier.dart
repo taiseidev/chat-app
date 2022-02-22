@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserStateNotifier extends StateNotifier<UserState> {
   UserStateNotifier() : super(UserState()) {
-    print('開始');
     init();
   }
 

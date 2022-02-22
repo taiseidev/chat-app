@@ -26,6 +26,7 @@ dependencies:
   open_file: ^3.2.1
   file_picker: ^4.3.3
   flutter_signin_button: ^2.0.0
+  skeletons: ^0.0.3
 
 dev_dependencies:
   flutter_test:

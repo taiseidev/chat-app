@@ -9,3 +9,6 @@ const String appBarTitle = 'Chat App';
 const String bottomNavigationHome = 'ホーム';
 const String bottomNavigationchat = 'チャット';
 const String bottomNavigationsetting = '設定';
+
+// user_information_screen.dart
+const double userInfoHeight = 200;
