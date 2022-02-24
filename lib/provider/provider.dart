@@ -1,3 +1,4 @@
+import 'package:chatapp/viewModel/user_search_screen_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../repository/firestore_repository.dart';
 import '../state/user_state.dart';
@@ -15,4 +16,9 @@ final userStateNotifierProvider =
 
 final onIconTap = StateNotifierProvider(
   (ref) => ChangeBottomNavigation(0),
+);
+
+final userSearchPageProvider =
+    StateNotifierProvider<UserSearchScreenViewModel, UserState>(
+  (ref) => UserSearchScreenViewModel(),
 );
