@@ -1,8 +1,14 @@
+import 'package:chatapp/commons/list/common_list.dart';
+import 'package:chatapp/commons/user/profile_image.dart';
+import 'package:chatapp/model/user/user_model.dart';
 import 'package:chatapp/provider/provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserSearchPage extends StatelessWidget {
+  const UserSearchPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +20,8 @@ class UserSearchPage extends StatelessWidget {
 class Body extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(userStateNotifierProvider);
+    final state = ref.watch(userSearchPageProvider);
+    final notifier = ref.watch(userSearchPageProvider.notifier);
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -48,7 +55,7 @@ class Body extends ConsumerWidget {
                 child: TextFormField(
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    labelText: '検索',
+                    labelText: '検索機能は後ほど実装する',
                     suffixIcon: IconButton(
                       onPressed: () {},
                       icon: const Icon(Icons.search),
@@ -60,34 +67,35 @@ class Body extends ConsumerWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: 100,
+              itemCount: state.usersList.length,
               itemBuilder: (BuildContext context, int index) {
-                return Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          'https://images.unsplash.com/photo-1556225496-ff493e20d9a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80'),
-                    ),
-                    title: Text(
-                      'テストさん',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    trailing: IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.delete),
-                    ),
-                    subtitle: Text(
-                      'Flutter学習中です！！',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
-                      ),
-                    ),
+                final data = state.usersList[index];
+                return CommonList(
+                  iconURL: data.iconURL,
+                  name: data.name,
+                  message: data.message,
+                  onTap: () => showCupertinoDialog(
+                    context: context,
+                    builder: (context) {
+                      return CupertinoAlertDialog(
+                        title: Text('${data.name}さんを追加しますか？'),
+                        actions: [
+                          CupertinoDialogAction(
+                            child: Text('閉じる'),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                          CupertinoDialogAction(
+                            child: Text('追加'),
+                            onPressed: () async {
+                              notifier.registerFrinedList(data.name, data.uid);
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 );
               },

@@ -3,7 +3,7 @@ import 'package:chatapp/state/user_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserStateNotifier extends StateNotifier<UserState> {
-  UserStateNotifier() : super(UserState()) {
+  UserStateNotifier() : super(const UserState()) {
     init();
   }
 

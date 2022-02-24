@@ -9,6 +9,8 @@ class UserState with _$UserState {
     @Default(false) bool isLoading,
     @Default(false) bool isReadyData,
     @Default(<UserModel>[]) List<UserModel> userInfoList,
+    @Default(<UserModel>[]) List<UserModel> usersList,
+    @Default(<dynamic>[]) List<dynamic> userNames,
     UserModel? userInfo,
   }) = _UserState;
 }

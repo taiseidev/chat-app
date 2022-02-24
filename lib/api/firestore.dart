@@ -28,7 +28,7 @@ class FirestoreAPI {
 
 // ユーザ情報をFirestoreから取得
   Future getUserData() async {
-    final uid = await UserRelated.getUserId();
+    final uid = await UserUtility.getCurrentUserId();
     final snapShot = await _db.doc('$user/$uid').get();
     return UserModel.fromSnapshot(snapShot);
   }
