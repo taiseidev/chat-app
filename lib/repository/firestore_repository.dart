@@ -1,4 +1,6 @@
 import 'package:chatapp/api/firestore.dart';
+import 'package:chatapp/model/friend/friend_list_model.dart';
+import 'package:chatapp/model/friend/friend_model.dart';
 import 'package:chatapp/model/user/user_model.dart';
 import 'package:chatapp/util/user_related.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -44,5 +46,17 @@ class FirestoreRepository {
         'createdAt': DateTime.now(),
       },
     );
+  }
+
+  static Stream<List<FriendListModel>> fetchFriendList() {
+    final snapShot = db.collection('$user/$uid/$friendUsers');
+    final stream = snapShot.snapshots().map(
+          (e) => e.docs
+              .map(
+                (e) => FriendListModel.fromJson(e.data()),
+              )
+              .toList(),
+        );
+    return stream;
   }
 }
