@@ -1,3 +1,5 @@
+import 'package:chatapp/model/friend/friend_list_model.dart';
+import 'package:chatapp/model/friend/friend_model.dart';
 import 'package:chatapp/viewModel/user_search_screen_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../repository/firestore_repository.dart';
@@ -22,3 +24,8 @@ final userSearchPageProvider =
     StateNotifierProvider<UserSearchScreenViewModel, UserState>(
   (ref) => UserSearchScreenViewModel(),
 );
+
+final itemsStreamProvider = StreamProvider<List<FriendListModel>>((ref) {
+  final stream = FirestoreRepository.fetchFriendList();
+  return stream;
+});

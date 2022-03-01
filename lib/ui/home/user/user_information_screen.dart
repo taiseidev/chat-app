@@ -48,7 +48,7 @@ class UserInformation extends ConsumerWidget {
                             height: 10,
                             borderRadius: BorderRadius.circular(8),
                             minLength: MediaQuery.of(context).size.width / 6,
-                            maxLength: MediaQuery.of(context).size.width / 2,
+                            maxLength: MediaQuery.of(context).size.width / 3,
                           )))
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
